@@ -31,6 +31,7 @@ export const getCardObject = (card) => {
 export const getCardValue = (cards) => {
     let aces = 0
     let total = cards.reduce((total, card) => {
+        if(card === 'cover') return total;
         let [number] = getCardObject(card)
         if(['J','Q','K'].includes(number)) number = 10
         if(number === 1) aces++

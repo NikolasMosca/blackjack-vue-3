@@ -1,0 +1,109 @@
+<template>
+  <div id="win">
+    <h1>{{checkWinner()}}</h1>
+    <h2>
+      <span :class="{
+        'win' : checkWinner() === 'YOU WIN', 
+        'lose': checkWinner() === 'YOU LOSE'
+      }">Player <br/> {{total}}</span>
+      <span :class="{
+        'win' : checkWinner() === 'YOU LOSE', 
+        'lose': checkWinner() === 'YOU WIN'
+      }">Table <br/> {{tableTotal}}</span>
+    </h2>
+    <button @click="onTryAgain(checkWinner())">
+      <span>Try again!</span>
+    </button>
+  </div>
+</template>
+
+<script setup>
+import { defineProps } from 'vue';
+  const props = defineProps({
+    total: Number,
+    tableTotal: Number,
+    onTryAgain: Function
+  })
+
+  const checkWinner = () => {
+    const { total, tableTotal } = props;
+
+    if(total > 21) return 'YOU LOSE'
+    if(tableTotal > 21) return 'YOU WIN'
+    if(total > tableTotal) return 'YOU WIN'
+    if(total === tableTotal) return 'DRAW'
+
+    return 'YOU LOSE'
+  }
+</script>
+
+<style lang="scss" scoped>
+    #win {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        color: white;
+        background: rgba(0, 0, 0, .8);
+    }
+
+    h1 {
+      font-size: 100px;
+      font-weight: 300;
+      color: white;
+
+      @media screen and (max-width: 415px) {
+        font-size: 70px;
+      }
+    }
+    
+    h2 {
+      font-weight: 300;
+      display: flex;
+
+      @media screen and (max-width: 415px) {
+        font-size: 40px;
+      }
+
+      > span {
+        display: block;
+        width: calc(50% - 20px);
+
+        &:first-child {
+          margin-right: 20px;
+        }
+        &:last-child {
+          margin-left: 20px;
+        }
+      }
+
+      .win {
+        color: lightgreen;
+      }
+
+      .lose {
+        color: lightcoral;
+      }
+    }
+
+    button {
+      margin: 25px 30px;
+      height: 120px;
+      width: 120px;
+      cursor: pointer;
+      font-size: 25px;
+      transition: 0.5s background;
+      transform: rotate(45deg);
+
+      > span {
+        display: block;
+        transform: rotate(-45deg);
+      }
+    }
+</style>

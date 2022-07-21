@@ -41,4 +41,10 @@ describe('test getCardObject function', () => {
     it('should return 26', () => {
         expect(getCardValue(['ace_of_clubs', 'jack_of_diamonds', 'king_of_diamonds', '5_of_spades'])).toEqual(26)
     })
+    it('should return 0', () => {
+        expect(getCardValue(['cover', 'cover', 'cover'])).toEqual(0)
+    })
+    it('should return 10', () => {
+        expect(getCardValue(['jack_of_diamonds', 'cover', 'cover'])).toEqual(10)
+    })
 })
