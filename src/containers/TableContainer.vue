@@ -49,10 +49,20 @@
   //Based on the average values of the cards
   const CPU_TOLERANCE = 6
 
+  let initialState = {
+    player: 0,
+    table: 0,
+    draw: 0
+  }
+  try {
+    initialState = JSON.parse(localStorage.getItem('stats'))
+  } catch(e) {
+    console.log(e)
+  }
+  const stats = ref(initialState);
   const finish = ref(false) 
   const tableCards = ref(['cover', 'cover'])
   const cards = ref([])
-  const stats = ref(useStats());
   const total = computed(() => getCardValue(cards.value))
   const tableTotal = computed(() => getCardValue(tableCards.value))  
 
