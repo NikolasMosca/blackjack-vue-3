@@ -1,15 +1,9 @@
 <template>
   <div id="win">
-    <h1>{{checkWinner()}}</h1>
+    <h1 :class="getClassPlayer()">{{checkWinner()}}</h1>
     <h2>
-      <span :class="{
-        'win' : checkWinner() === 'YOU WIN', 
-        'lose': checkWinner() === 'YOU LOSE'
-      }">Player <br/> {{total}}</span>
-      <span :class="{
-        'win' : checkWinner() === 'YOU LOSE', 
-        'lose': checkWinner() === 'YOU WIN'
-      }">Table <br/> {{tableTotal}}</span>
+      <span :class="getClassPlayer()">Player <br/> {{total}}</span>
+      <span :class="getClassTable()">Table <br/> {{tableTotal}}</span>
     </h2>
     <button @click="onTryAgain(checkWinner())">
       <span>Try again!</span>
@@ -35,6 +29,9 @@ import { defineProps } from 'vue';
 
     return 'YOU LOSE'
   }
+
+  const getClassPlayer = () => checkWinner() === 'YOU WIN' ? 'win' : (checkWinner() === 'YOU LOSE' ? 'lose' : '')
+  const getClassTable = () => checkWinner() === 'YOU WIN' ? 'lose' : (checkWinner() === 'YOU LOSE' ? 'win' : '')
 </script>
 
 <style lang="scss" scoped>
@@ -82,14 +79,14 @@ import { defineProps } from 'vue';
           margin-left: 20px;
         }
       }
+    }
 
-      .win {
+    .win {
         color: lightgreen;
       }
 
-      .lose {
-        color: lightcoral;
-      }
+    .lose {
+      color: lightcoral;
     }
 
     button {
