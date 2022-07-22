@@ -1,5 +1,5 @@
 <template>
-  <div id="table">
+  <div id="table" :style="`height: ${windowHeight}px`">
     <div class="card-container">
       <CardComponent 
         v-for="(card, index) in tableCards" 
@@ -55,6 +55,7 @@
   const stats = useStats();
   const total = computed(() => getCardValue(cards.value))
   const tableTotal = computed(() => getCardValue(tableCards.value))  
+  const windowHeight = window.innerHeight
 
   //Pick new card for the player
   const pickNewCard = () => {
