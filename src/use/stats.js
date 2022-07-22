@@ -1,5 +1,3 @@
-import { ref } from "vue";
-
 export default function useStats() {
     let initialState = {
         player: 0,
