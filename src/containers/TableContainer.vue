@@ -40,7 +40,6 @@
 <script setup>
   import { ref, computed } from 'vue'
   import { getCard, getCardValue, pickCard } from '../utils/cards'
-  import useStats from '../use/stats'
   import CardComponent from '../components/CardComponent.vue'
   import WinComponent from '../components/WinComponent.vue';
   import StatsComponent from '../components/StatsComponent.vue';
