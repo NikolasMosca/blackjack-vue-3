@@ -31,7 +31,10 @@
         padding: 10px;
         
         > div {
-            margin-right: 20px;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 </style>
