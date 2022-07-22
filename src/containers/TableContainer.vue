@@ -52,7 +52,7 @@
   const finish = ref(false) 
   const tableCards = ref(['cover', 'cover'])
   const cards = ref([])
-  const stats = useStats();
+  const stats = ref(useStats());
   const total = computed(() => getCardValue(cards.value))
   const tableTotal = computed(() => getCardValue(tableCards.value))  
 

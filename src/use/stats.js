@@ -11,5 +11,5 @@ export default function useStats() {
     } catch(e) {
         console.log(e)
     }
-    return ref(initialState)
+    return initialState
 }
