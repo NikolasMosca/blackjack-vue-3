@@ -1,13 +1,19 @@
+import { ref } from "vue";
+
 export default function useStats() {
-    let initialState = {
-        player: 0,
-        table: 0,
-        draw: 0
-    }
-    try {
-        initialState = JSON.parse(localStorage.getItem('stats'))
-    } catch(e) {
-        console.log(e)
-    }
-    return initialState
+    return ref((() => {
+        let initialState = {
+            player: 0,
+            table: 0,
+            draw: 0
+        }
+        if(!localStorage.getItem('stats')) {
+            return initialState;
+        }
+        try {
+          return JSON.parse(localStorage.getItem('stats'))
+        } catch(e) {
+          return initialState
+        }
+    })())
 }

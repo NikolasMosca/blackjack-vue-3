@@ -40,6 +40,7 @@
 <script setup>
   import { ref, computed } from 'vue'
   import { getCard, getCardValue, pickCard } from '../utils/cards'
+  import useStats from '../use/stats'
   import CardComponent from '../components/CardComponent.vue'
   import WinComponent from '../components/WinComponent.vue';
   import StatsComponent from '../components/StatsComponent.vue';
@@ -48,20 +49,10 @@
   //Based on the average values of the cards
   const CPU_TOLERANCE = 6
 
-  let initialState = {
-    player: 0,
-    table: 0,
-    draw: 0
-  }
-  try {
-    initialState = JSON.parse(localStorage.getItem('stats'))
-  } catch(e) {
-    console.log(e)
-  }
-  const stats = ref(initialState);
   const finish = ref(false) 
   const tableCards = ref(['cover', 'cover'])
   const cards = ref([])
+  const stats = useStats();
   const total = computed(() => getCardValue(cards.value))
   const tableTotal = computed(() => getCardValue(tableCards.value))  
 
@@ -110,7 +101,7 @@
 <style lang="scss" scoped>
   $points-color: white;
   $pick-card-bg: lightgreen;
-  $show-card-bg: rgb(209, 34, 34);
+  $show-card-bg: #f00;
 
   #table {
     background: url(../../public/images/table-bg.webp);
