@@ -14,6 +14,10 @@
 
 <style lang="scss" scoped>
     .card {
+      transition: all 500ms linear;
+      flex: .00001;
+      animation: flexGrow 500ms ease forwards;
+
       overflow: hidden;
 
       > img {
@@ -35,6 +39,12 @@
       }
       to {
         transform: translateY(0)
+      }
+    }
+
+    @keyframes flexGrow {
+      to {
+        flex: 1;
       }
     }
 </style>

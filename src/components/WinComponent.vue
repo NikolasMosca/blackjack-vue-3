@@ -47,7 +47,7 @@ import { defineProps } from 'vue';
         align-items: center;
         font-size: 40px;
         color: white;
-        background: rgba(0, 0, 0, .8);
+        background: rgba(0, 0, 0, .9);
     }
 
     h1 {
@@ -68,6 +68,10 @@ import { defineProps } from 'vue';
         font-size: 40px;
       }
 
+      @media (orientation: landscape) {
+        font-size: 40px;
+      }
+
       > span {
         display: block;
         width: calc(50% - 20px);
@@ -80,7 +84,6 @@ import { defineProps } from 'vue';
         }
       }
     }
-
     .win {
         color: lightgreen;
       }
@@ -101,6 +104,10 @@ import { defineProps } from 'vue';
       > span {
         display: block;
         transform: rotate(-45deg);
+      }
+
+      @media (orientation: landscape) {
+        margin: 0px 30px;
       }
     }
 </style>

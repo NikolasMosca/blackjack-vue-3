@@ -1,13 +1,15 @@
 <template>
-  <div id="table" :style="`height: ${windowHeight}px`">
-    <div class="card-container">
-      <CardComponent 
-        v-for="(card, index) in tableCards" 
-        :key="`${card}-${index}`" 
-        :card="card" 
-      />
-    </div>
-    <h1>TABLE: {{tableTotal}}</h1>
+  <div id="table" :style="`height: ${height}px`">
+    <div>
+      <div class="card-container">
+        <CardComponent 
+          v-for="(card, index) in tableCards" 
+          :key="`${card}-${index}`" 
+          :card="card" 
+        />
+      </div>
+      <h1>TABLE: {{tableTotal}}</h1>
+    </div> 
 
     <div class="button-container">
       <button class="pick-card" @click="pickNewCard">
@@ -18,21 +20,25 @@
       </button>
     </div>
 
-    <h1>PLAYER: {{total}}</h1>
-    <div class="card-container">
-      <CardComponent 
-        v-for="(card, index) in cards" 
-        :key="`${card}-${index}`" 
-        :card="card" 
-      />
+    <div>
+      <h1>PLAYER: {{total}}</h1>
+      <div class="card-container">
+        <CardComponent 
+          v-for="(card, index) in cards" 
+          :key="`${card}-${index}`" 
+          :card="card" 
+        />
+      </div>
     </div>
-
-    <WinComponent 
-      v-if="finish || total > 21" 
-      :total="total" 
-      :table-total="tableTotal"
-      :onTryAgain="onTryAgain"
-    />
+    
+    <Transition>
+      <WinComponent 
+        v-if="finish || total > 21" 
+        :total="total" 
+        :table-total="tableTotal"
+        :onTryAgain="onTryAgain"
+      />
+    </Transition>
     <StatsComponent :stats="stats" />
   </div>
 </template>
@@ -41,6 +47,7 @@
   import { ref, computed } from 'vue'
   import { getCard, getCardValue, pickCard } from '../utils/cards'
   import useStats from '../use/stats'
+  import { useWindowSize } from 'vue-window-size';
   import CardComponent from '../components/CardComponent.vue'
   import WinComponent from '../components/WinComponent.vue';
   import StatsComponent from '../components/StatsComponent.vue';
@@ -55,7 +62,7 @@
   const stats = useStats();
   const total = computed(() => getCardValue(cards.value))
   const tableTotal = computed(() => getCardValue(tableCards.value))  
-  const windowHeight = window.innerHeight
+  const { height } = useWindowSize();
 
   //Pick new card for the player
   const pickNewCard = () => {
@@ -112,9 +119,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     @media screen and (max-height: 1100px) {
       padding-top: 100px;
+    }
+
+    @media (orientation: landscape) {
+      flex-direction: row;
     }
   }
 
@@ -175,5 +187,15 @@
         background: lighten($show-card-bg, 20%);
       }
     }
+  }
+
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
   }
 </style>

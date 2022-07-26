@@ -1,9 +1,8 @@
 <template>
   <div>
-<TableContainer />
-  <PreloadImages />
+    <TableContainer />
+    <PreloadImages />
   </div>
-  
 </template>
 
 <script>
