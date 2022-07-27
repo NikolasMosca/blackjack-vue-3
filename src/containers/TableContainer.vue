@@ -125,7 +125,7 @@
       padding-top: 100px;
     }
 
-    @media (orientation: landscape) {
+    @media (orientation: landscape) and (max-height: 750px) {
       flex-direction: row;
     }
   }
